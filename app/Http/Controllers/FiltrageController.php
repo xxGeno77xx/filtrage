@@ -49,8 +49,6 @@ class FiltrageController extends Controller
                     ],
                     "Type": "Role"
                 },
-                
-                "WriteResultsToDatabase": "true",
                 "PredefinedSearchName": "Filtrage de paiement",
                 "WriteResultsToDatabase": "false",
                 "ExcludeScreeningListMatches": "false",
