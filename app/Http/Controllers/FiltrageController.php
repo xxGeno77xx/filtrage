@@ -24,6 +24,7 @@ class FiltrageController extends Controller
             "country" => $request->country,
             "adress_type" => $request->adress_type,
             "entity_type" => $request->entity_type,
+            "WriteResultsToDatabase" => $request->WriteResultsToDatabase,
         ];
             $payload = self::payload($request);
  
@@ -35,7 +36,7 @@ class FiltrageController extends Controller
     private static function payload(Request $data): string
     {
         $newRef = Str::uuid();
-
+        
         $payload = '{
             "ClientContext": {
                 "ClientReference": ' . '"' . $newRef . '"
@@ -50,7 +51,7 @@ class FiltrageController extends Controller
                     "Type": "Role"
                 },
                 "PredefinedSearchName": "Filtrage de paiement",
-                "WriteResultsToDatabase": "false",
+                "WriteResultsToDatabase": ' . '"' . $data->WriteResultsToDatabase . '",
                 "ExcludeScreeningListMatches": "false",
                 "DuplicateMatchSuppression": "false",
                 "DuplicateMatchSuppressionSameDivisionOnly": "false"
@@ -84,7 +85,7 @@ class FiltrageController extends Controller
                     }
                 ]
             }
-        }';
+        }'; 
         return $payload;
     }
 }

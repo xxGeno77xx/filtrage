@@ -41,7 +41,6 @@ class Filtrage
             $clientReference = $response->collect()["ClientReference"];
         }
 
-
         if (!($apiRecords == null)) {
 
             $date = Carbon::parse($params["birth_year"]."/".$params["birth_month"]."/".$params["birth_day"]);
@@ -68,13 +67,14 @@ class Filtrage
                     "lockedAlert" => $record["LockedAlert"] ?? null,
 
                 ]);
-
+                
                 $recordDetailId = RecordDetail::updateOrCreate([
                     "personne_id" =>  $personid ?? null,
                 ], [
                     "acceptlistid" => $record["RecordDetails"]["AcceptListID"] ?? null,
                     "accountamount" => $record["RecordDetails"]["AccountAmount"] ?? null,
-                    "accountdate" => $record["RecordDetails"]["AccountDate"] == "" ? null : Carbon::parse($record["RecordDetails"]["AccountDate"]),
+                    // "accountdate" => $record["RecordDetails"]["AccountDate"] == "" ? null : Carbon::parse($record["RecordDetails"]["AccountDate"]),
+                    "accountdate" => empty($record["RecordDetails"]["AccountDate"]) ? null : Carbon::parse($record["RecordDetails"]["AccountDate"]),
                     "accountgroupid" => $record["RecordDetails"]["AccountGroupID"] ?? null,
                     "accountotherdata" => $record["RecordDetails"]["AccountOtherData"] ?? null,
                     "accountproviderid" => $record["RecordDetails"]["AccountProviderID"] ?? null,
